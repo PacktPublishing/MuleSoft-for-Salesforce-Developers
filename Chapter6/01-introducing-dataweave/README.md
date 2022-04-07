@@ -14,3 +14,27 @@ output application/json
 ---
 "Hello World"
 ```
+
+## Adding comments to your code
+
+`single-comments.dwl`
+
+```dataweave
+%dw 2.0
+output application/json
+---
+"Hello World" // this is a comment
+```
+
+`multi-line-comments.dwl`
+
+```dataweave
+%dw 2.0
+output application/json
+---
+/* This is a comment
+ * ...a multi-line comment.
+ * And it ends here */
+"Hello World" 
+// this is a single-line comment
+```
