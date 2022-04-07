@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<payload>
+  <data>
+    <firstName>Appy</firstName>
+    <lastName>the Bobcat</lastName>
+    <pronouns>She/Her</pronouns>
+  </data>
+  <data>
+    <firstName>Astro</firstName>
+    <lastName>Nomical</lastName>
+    <pronouns>They/Them</pronouns>
+  </data>
+  <data>
+    <firstName>Max</firstName>
+    <lastName>the Mule</lastName>
+    <pronouns>He/Him</pronouns>
+  </data>
+</payload>
