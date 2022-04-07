@@ -6,7 +6,7 @@ You can either copy and paste from this README directly, or you can go to the co
 
 ## Diving into a script's anatomy
 
-### `basic-script.dwl`
+`basic-script.dwl`
 
 ```dataweave
 %dw 2.0
@@ -17,7 +17,7 @@ output application/json
 
 ## Adding comments to your code
 
-### `single-comments.dwl`
+`single-comments.dwl`
 
 ```dataweave
 %dw 2.0
@@ -26,7 +26,7 @@ output application/json
 "Hello World" // this is a comment
 ```
 
-### `multi-line-comments.dwl`
+`multi-line-comments.dwl`
 
 ```dataweave
 %dw 2.0
@@ -41,7 +41,7 @@ output application/json
 
 ## Understanding data formats
 
-### `csv-format.csv`
+`csv-format.csv`
 
 ```csv
 firstName,lastName,pronouns
@@ -50,7 +50,7 @@ Astro,Nomical,They/Them
 Max,the Mule,He/Him
 ```
 
-### `dw-format.dwl`
+`dw-format.dwl`
 
 ```dataweave
 [
