@@ -38,3 +38,15 @@ output application/json
 "Hello World" 
 // this is a single-line comment
 ```
+
+## Understanding data formats
+
+`csv-format.csv`
+
+```csv
+firstName,lastName,pronouns
+Appy,the Bobcat,She/Her
+Astro,Nomical,They/Them
+Max,the Mule,He/Him
+```
+
