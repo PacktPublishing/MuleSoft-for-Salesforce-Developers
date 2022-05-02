@@ -148,3 +148,35 @@ output application/dw
     }
 }
 ```
+
+## Creating and using variables
+
+`simple-var.dwl`
+
+```dataweave
+%dw 2.0
+output application/dw
+var hello = "Hello World"
+---
+hello // outputs "Hello World"
+```
+
+`var-with-type.dwl`
+
+```dataweave
+%dw 2.0
+output application/dw
+var hello: String = "Hello World"
+---
+hello // outputs "Hello World"
+```
+
+`var-with-lambda.dwl`
+
+```dataweave
+%dw 2.0
+output application/dw
+var hello = (str) -> str
+---
+hello("Hello World") // outputs "Hello World"
+```
