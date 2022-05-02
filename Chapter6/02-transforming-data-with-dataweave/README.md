@@ -180,3 +180,61 @@ var hello = (str) -> str
 ---
 hello("Hello World") // outputs "Hello World"
 ```
+
+## Defining and calling functions
+
+`simple-fun.dwl`
+
+```dataweave
+%dw 2.0
+output application/dw
+fun echo() = "Hello World"
+---
+echo() // outputs "Hello World"
+```
+
+`simple-fun-with-args.dwl`
+
+```dataweave
+%dw 2.0
+output application/dw
+fun echo(msg) = msg
+---
+echo("Hello World") // outputs "Hello World"
+```
+
+`simple-fun-opt-args.dwl`
+
+```dataweave
+%dw 2.0
+output application/dw
+fun echo(msg1, msg2 = "!") = msg1 ++ msg2 // ++ concatenates the strings
+---
+{
+    twoArgs: echo("Hello ", "World"), // outputs "Hello World"
+    oneArg: echo("Hello") // outputs "Hello!"
+}
+```
+
+`lambda-in-var.dwl`
+
+```dataweave
+%dw 2.0
+output application/dw
+var echo = (msg1, msg2 = "!") -> msg1 ++ msg2 // ++ concatenates the strings
+---
+{
+    twoArgs: echo("Hello ", "World"), // outputs "Hello World"
+    oneArg: echo("Hello") // outputs "Hello!"
+}
+```
+
+`lambda-in-body.dwl`
+
+```dataweave
+%dw 2.0
+output application/dw
+---
+((msg1, msg2 = "!") -> msg1 ++ msg2)("Hello ", "World")
+// outputs "Hello World"
+```
