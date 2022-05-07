@@ -254,3 +254,29 @@ fun plus(data1, data2): Null = null
     Others: plus(1, "World") // null
 }
 ```
+
+`sum-recursive-fun.dwl`
+
+```dataweave
+%dw 2.0
+output application/dw
+fun sum(number: Number): Number = 
+    if (number > 0) 
+        number + sum(number - 1)
+    else 0
+---
+sum(3) // 6
+```
+
+`sumtail-recursive-fun.dwl`
+
+```dataweave
+%dw 2.0
+output application/dw
+fun sumtail(number: Number, result: Number = 0): Number = 
+    if (number > 0) 
+        sumtail(number - 1, result + number)
+    else result
+---
+sumtail(3) // 6
+```
