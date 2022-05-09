@@ -4,7 +4,7 @@ Find here the scripts or snippets used for Chapter 6, Transform with DataWeave.
 
 You can either copy and paste from this README directly, or you can go to the corresponding file.
 
-## Diving into a script's anatomy
+## Script's anatomy
 
 `basic-script.dwl`
 
@@ -15,7 +15,7 @@ output application/json
 "Hello World"
 ```
 
-## Adding comments to your code
+## Comments
 
 `single-comments.dwl`
 
@@ -39,7 +39,7 @@ output application/json
 // this is a single-line comment
 ```
 
-## Understanding data formats
+## Data formats
 
 `csv-format.csv`
 

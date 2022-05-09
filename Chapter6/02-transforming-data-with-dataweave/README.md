@@ -4,7 +4,7 @@ Find here the scripts or snippets used for Chapter 6, Transform with DataWeave.
 
 You can either copy and paste from this README directly, or you can go to the corresponding file.
 
-## Using operators
+## Operators
 
 `mathematical-operators.dwl`
 
@@ -149,7 +149,7 @@ output application/dw
 }
 ```
 
-## Creating and using variables
+## Variables
 
 `simple-var.dwl`
 
@@ -181,7 +181,7 @@ var hello = (str) -> str
 hello("Hello World") // outputs "Hello World"
 ```
 
-## Defining and calling functions
+## Functions
 
 `simple-fun.dwl`
 
@@ -280,3 +280,214 @@ fun sumtail(number: Number, result: Number = 0): Number =
 ---
 sumtail(3) // 6
 ```
+
+## Selectors
+
+`single-value-selector.dwl`
+
+```dataweave
+%dw 2.0
+output application/dw
+var objExample = {
+    key1: "value1",
+    key2: "value2",
+    key2: "value2.1", // note this key is repeated (key2)
+    key3: {
+        "key3.1": "value3.1",
+        "key3.2": {
+            "key3.1": "value3.2"
+        }
+    }
+}
+---
+{
+    SingleValue1: objExample.key1, // "value1"
+    SingleValue2: objExample.key2, // "value2"
+    SingleValue3: objExample.key3, // {"key3.1":"value3.1","key3.2":{...}}
+    SingleValue4: objExample."key3.1" // null
+}
+```
+
+`multi-value-selector.dwl`
+
+```dataweave
+%dw 2.0
+output application/dw
+var objExample = {
+    key1: "value1",
+    key2: "value2",
+    key2: "value2.1", // note this key is repeated (key2)
+    key3: {
+        "key3.1": "value3.1",
+        "key3.2": {
+            "key3.1": "value3.2"
+        }
+    }
+}
+---
+{
+    MultiValue1: objExample.*key1, // ["value1"]
+    MultiValue2: objExample.*key2, // ["value2","value2.1"]
+    MultiValue3: objExample.*key3, // [{"key3.1":"value3.1", ... }]
+    MultiValue4: objExample.*"key3.1" // null
+}
+```
+
+`descendants-selector.dwl`
+
+```dataweave
+%dw 2.0
+output application/dw
+var objExample = {
+    key1: "value1",
+    key2: "value2",
+    key2: "value2.1", // note this key is repeated (key2)
+    key3: {
+        "key3.1": "value3.1",
+        "key3.2": {
+            "key3.1": "value3.2"
+        }
+    }
+}
+---
+{
+    Descendants1: objExample..key1, // ["value1"]
+    Descendants2: objExample..key2, // ["value2"]
+    Descendants3: objExample..key3, // [{"key3.1":"value3.1", ... }]
+    Descendants4: objExample.."key3.1", // ["value3.1","value3.2"]
+    Descendants5: objExample.."key3.2" // [{"key3.1":"value3.2"}]
+}
+```
+
+`key-value-pair-selector.dwl`
+
+```dataweave
+%dw 2.0
+output application/dw
+var objExample = {
+    key1: "value1",
+    key2: "value2",
+    key2: "value2.1", // note this key is repeated (key2)
+    key3: {
+        "key3.1": "value3.1",
+        "key3.2": {
+            "key3.1": "value3.2"
+        }
+    }
+}
+---
+{
+    KeyValuePair1: objExample.&key1, // {key1:"value1"}
+    KeyValuePair2: objExample.&key2, // {key2:"value2",key2:"value2.1"}
+    KeyValuePair3: objExample.&key3, // {key3:{...}}
+    KeyValuePair4: objExample.&"key3.1" // null
+}
+```
+
+`index-selector.dwl`
+
+```dataweave
+%dw 2.0
+output application/dw
+var objExample = {
+    key1: "value1", // index 0 or -4
+    key2: "value2", // index 1 or -3
+    key2: "value2.1", // index 2 or -2
+    key3: { //index 3 or -1
+        "key3.1": "value3.1",
+        "key3.2": {
+            "key3.1": "value3.2"
+        }
+    }
+}
+var arrExample = [
+    1, // index 0 or -6
+    "Hello", // index 1 or -5
+    key1: "value1", // index 2 or -4
+    {key2: "value2"}, // index 3 or -3
+    [2, 3], // index 4 or -2
+    [4, [5, [6, 7]]] // index 5 or -1
+]
+---
+{
+    Index1: objExample[0], // "value1"
+    Index2: objExample[-1], // {"key3.1":"value3.1","key3.2":{...}}
+    Index3: arrExample[1], // "Hello"
+    Index4: arrExample[-1], // [4,[5,[6,7]]]
+    Index5: "Hello"[-4] // "e"
+}
+```
+
+`range-selector.dwl`
+
+```dataweave
+%dw 2.0
+output application/dw
+var arrExample = [
+    1, // index 0 or -6
+    "Hello", // index 1 or -5
+    key1: "value1", // index 2 or -4
+    {key2: "value2"}, // index 3 or -3
+    [2, 3], // index 4 or -2
+    [4, [5, [6, 7]]] // index 5 or -1
+]
+---
+{
+    Range1: arrExample[0 to 3], // [1,"Hello",{key1:"value1"},{key2:"value2"}]
+    Range2: arrExample[-1 to 0], // [[4,[5,[6,7]]], ... 1]
+    Range3: "Hello"[-1 to 0], // "olleH"
+    Range4: "Hello World"[0 to 4], // "Hello"
+    Range5: "Hello World"[0 to -1] // "Hello World"
+}
+```
+
+`additional-selectors-examples.dwl`
+
+```dataweave
+%dw 2.0
+output application/json
+var objExample = {
+    key1: "value1",
+    key2: "value2",
+    key2: "value2.1",
+    key3: {
+        "key3.1": "value3.1",
+        "key3.2": {
+            "key3.1": "value3.2",
+            key2: "value2.2"
+        }
+    }
+}
+var arrExample = [
+    1, // index 0 or -6
+    "Hello", // index 1 or -5
+    key1: "value1", // index 2 or -4
+    {key2: "value2"}, // index 3 or -3
+    [2, 3], // index 4 or -2
+    [4, [5, [6, 7]]] // index 5 or -1
+]
+var dynamicKey = "key1"
+fun getDynamicKey(value: Number | String): String =
+    "key" ++ value
+---
+{
+    Example1: {
+        MultiValue: objExample.*key2, // ["value2","value2.1"]
+        Descendants: objExample..key2, // ["value2","value2.2"]
+        Combined: objExample..*key2, // ["value2","value2.1","value2.2"]
+        "Descendants-KeyValue": objExample..&key2 // [{"key2":"value2","key2":"value2.1"},{"key2":"value2.2"}]
+    },
+    Example2: {
+        Object: objExample[-1][1][0], // "value3.2"
+        Array: arrExample[-1][-1][-1][0], // 6
+    },
+    Example3: objExample[-1].."key3.1", // ["value3.1","value3.2"]
+    Example4: {
+        Dynamic1: objExample["key1"], // "value1"
+        Dynamic2: objExample[dynamicKey], // "value1"
+        Dynamic3: objExample[getDynamicKey(1)], // "value1"
+        Dynamic4: objExample[getDynamicKey("1")] // "value1"
+    }
+}
+```
+
