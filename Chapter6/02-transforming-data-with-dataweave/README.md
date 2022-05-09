@@ -491,3 +491,76 @@ fun getDynamicKey(value: Number | String): String =
 }
 ```
 
+## Scopes and flow control
+
+`simple-if-else.dwl`
+
+```dataweave
+%dw 2.0
+output application/dw
+var age: Number = 25
+---
+if (age >= 21) "Adult"
+else "Minor"
+// returns "Adult"
+```
+
+`chained-if-else.dwl`
+
+```dataweave
+%dw 2.0
+output application/dw
+var age: Number = -1
+---
+if (age >= 21) "Adult"
+else if (age >= 0) "Minor"
+else "Invalid data"
+// returns "Invalid data"
+```
+
+`key-value-pair-if-condition.dwl`
+
+```dataweave
+%dw 2.0
+output application/dw
+var value2 = 0
+---
+{
+    key1: "value1",
+    (key2: value2) if value2 != 0
+} 
+// outputs {key1:"value1"}
+```
+
+`simple-match-case.dwl`
+
+```dataweave
+%dw 2.0
+output application/dw
+var age: Number = 25
+---
+age match {
+    case a if a >= 21 -> "Adult"
+    case a if a >= 0 -> "Minor"
+    else -> "Invalid Data"
+}
+// outputs "Adult"
+```
+
+`local-context-do.dwl`
+
+```dataweave
+%dw 2.0
+output application/dw
+fun sumtail(number: Number, result: Number = 0): Number = do {
+    var newNumber = number - 1
+    var newResult = result + number
+    ---
+    if (number > 0) 
+        sumtail(newNumber, newResult)
+    else result
+}
+---
+sumtail(255) // 32640
+```
+
