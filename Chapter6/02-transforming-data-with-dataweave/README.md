@@ -491,7 +491,7 @@ fun getDynamicKey(value: Number | String): String =
 }
 ```
 
-## Scopes and flow control
+## Scope and flow control
 
 `simple-if-else.dwl`
 
