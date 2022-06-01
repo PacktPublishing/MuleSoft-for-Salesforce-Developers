@@ -1,0 +1,3 @@
+import function1, function2, function3 from Module
+---
+function1()

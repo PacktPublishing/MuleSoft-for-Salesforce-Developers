@@ -1,0 +1,4 @@
+import function from Module1
+import function from Module2
+---
+function() // from Module1

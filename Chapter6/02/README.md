@@ -1,6 +1,6 @@
-# Transforming data with DataWeave
+# Part 2: Writing DataWeave scripts
 
-Find here the scripts or snippets used for Chapter 6, Transform with DataWeave.
+Find here the scripts or snippets used for Chapter 6, Learning DataWeave.
 
 You can either copy and paste from this README directly, or you can go to the corresponding file.
 

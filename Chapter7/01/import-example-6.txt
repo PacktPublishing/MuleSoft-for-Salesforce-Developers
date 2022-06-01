@@ -1,0 +1,4 @@
+import Module1
+import Module2
+---
+Module2::function()

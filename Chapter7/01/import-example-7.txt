@@ -1,0 +1,8 @@
+import Module1 as Mod1 // alias Mod1 for Module1
+import function1 as f1 from Module2 // alias f1 for function1
+import function2 as f2, function3 as f3 from Module3 // aliases f2 and f3 for functions from the same module (Module3)
+---
+// Mod1::function
+// f1()
+// f2()
+f3()

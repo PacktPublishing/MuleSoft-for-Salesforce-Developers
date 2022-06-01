@@ -1,0 +1,3 @@
+import folder1::folder2::Module
+---
+Module::function()
