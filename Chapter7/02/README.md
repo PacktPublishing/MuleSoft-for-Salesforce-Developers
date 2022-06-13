@@ -20,3 +20,80 @@ output application/dw
 }
 ```
 
+`sizeOf.dwl`
+
+```dataweave
+%dw 2.0
+output application/dw
+---
+{
+    Array: sizeOf([0, 1, 2, 3]), // 4
+    String: sizeOf("Hello World!"), // 12
+    Object: sizeOf({"a":"b", "c":"d"}), // 2
+    Null: sizeOf(null) // null
+}
+```
+
+`typeOf.dwl`
+
+```dataweave
+%dw 2.0
+output application/dw
+---
+{
+    Array: typeOf([0, 1, 2, 3]), // Array
+    String: typeOf("Hello World!"), // String
+    Object: typeOf({"a":"b", "c":"d"}), // Object
+    Null: typeOf(null), // Null
+    Boolean: typeOf(true), // Boolean
+    Number: typeOf(10), // Number
+    Date: typeOf(|2020-01-01|), // Date
+    Period: typeOf(|P1Y|) // Period
+}
+```
+
+`isEmpty.dwl`
+
+```dataweave
+%dw 2.0
+output application/dw
+---
+{
+    Array: isEmpty([]), // true
+    String: isEmpty(""), // true
+    Object: isEmpty({}), // true
+    Null: isEmpty(null) // true
+}
+```
+
+`groupBy.dwl`
+
+```dataweave
+%dw 2.0
+output application/dw
+
+var arrayObject = [
+    {
+        id: 1,
+        name: "alex",
+        email: "alex@fakeemail.com"
+    },
+    {
+        id: 2,
+        name: "akshata",
+        email: "akshata@fakeemail.com"
+    },
+    {
+        id: 3,
+        name: "arul",
+        email: "arul@fakeemail.com"
+    }
+]
+var groupedByEmail = arrayObject groupBy ((item, index) -> item.email)
+
+var dynamicInputEmail = "arul@fakeemail.com"
+---
+groupedByEmail[dynamicInputEmail][0]
+//(arrayObject filter $.email == dynamicInputEmail)[0]
+```
+

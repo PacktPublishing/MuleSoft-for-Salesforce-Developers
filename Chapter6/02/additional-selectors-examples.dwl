@@ -1,5 +1,5 @@
 %dw 2.0
-output application/json
+output application/dw
 var objExample = {
     key1: "value1",
     key2: "value2",

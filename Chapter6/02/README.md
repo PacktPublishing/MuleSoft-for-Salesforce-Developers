@@ -13,23 +13,10 @@ You can either copy and paste from this README directly, or you can go to the co
 output application/dw
 ---
 {
-    Addition: {
-        DateTimes: |2020-01-01| + |P2D|, // = |2020-01-03|
-        Numbers: 1 + 2, // = 3
-        Array: ["a", "b"] + "c" // = ["a", "b", "c"]
-    },
-    Subtraction: {
-        DateTimes: |2020-01-03| - |P1D|, // = |2020-01-02|
-        Numbers: 3 - 1, // = 2
-        Array: ["a", "b", "c"] - "a", // = ["b", "c"]
-        Object: { k1:"v1", k2:"v2" } - "k1" // = { k2: "v2" }
-    },
-    Multiplication: {
-        Numbers: 3 * 3 // = 9
-    },
-    Division: {
-        Numbers: 9 / 3 // = 3
-    }
+    Addition: |2020-01-01| + |P2D|, // = |2020-01-03|
+    Subtraction: ["a", "b", "c"] - "a", // = ["b", "c"]
+    Multiplication: 3 * 3, // = 9
+    Division: 9 / 3 // = 3
 }
 ```
 
@@ -40,50 +27,12 @@ output application/dw
 output application/dw
 ---
 {
-    LessThan: {
-        Strings: "a" < "b", // true
-        Booleans: true < false, // false
-        Numbers: 1 < 2, // true
-        DateTimes: |2020-01-01| < |2022-01-01| // true
-    },
-    GreaterThan: {
-        Strings: "a" > "b", // false
-        Booleans: true > false, //true
-        Numbers: 1 > 2, // false
-        DateTimes: |15:00:00| > |13:00:00| // true
-    },
-    LessOrEqualTo: {
-        Strings: "a" <= "a", // true
-        Booleans: true <= true, // true
-        Numbers: 1 <= 1, // true
-        DateTimes: |2020-01-01| <= |2020-01-01| // true
-    },
-    GreaterOrEqualTo: {
-        Strings: "a" >= "a", // true
-        Booleans: true >= true, // true
-        Numbers: 1 >= 1, // true
-        DateTimes: |2020-01-01| >= |2020-01-01| // true
-    },
-    EqualTo: {
-        Strings: "a" == "b", // false
-        Booleans: true == false, // false
-        Numbers: 1 == 1, // true
-        DateTimes: |2020-01-01| == |2020-01-01T10:00:00|, // false
-        Nulls: null == null, // true
-        Arrays: [1, 2, 3] == [1, 2, "3"], // false
-        Objects: {a:"1"} == {a:1}, // false
-        DiffTypes: 1 == "1" // false
-    },
-    SimilarTo: {
-        Strings: "true" ~= true, // true
-        Booleans: false ~= "false", // true
-        Numbers: 1 ~= "1", // true
-        DateTimes: |2020-01-01| ~= |2020-01-01T10:00:00|, // true
-        Nulls: null ~= null, // true
-        Arrays: [1, 2, 3] ~= [1, 2, "3"], // true
-        Objects: {a:"1"} ~= {a:1}, // true
-        DiffTypes: 1 ~= "1" // true
-    }
+    LessThan: 1 < 2, // true
+    GreaterThan: "a" > "b", // false
+    LessOrEqualTo: |2020-01-01| <= |2020-01-01|, // true
+    GreaterOrEqualTo: 1 >= 1, // true
+    EqualTo: 1 == "1", // false
+    SimilarTo: 1 ~= "1" // true
 }
 ```
 
@@ -94,35 +43,15 @@ output application/dw
 output application/dw
 ---
 {
-    "not": {
-        Example1: not true, // false
-        Example2: not false, // true
-        Example3: not 1 == 2 // true
-    },
-    "!": {
-        Example1: ! true, // false
-        Example2: ! false, // true
-        Example3: ! (1 ~= "1") // false
-    },
-    "and": {
-        Example1: true and true, // true
-        Example2: true and false, // false
-        Example3: false and false, // false
-        Example4: (5 > 2) and (4 < 9) // true
-    },
-    "or": {
-        Example1: true or true, // true
-        Example2: true or false, // true
-        Example3: false or false, // false
-        Example4: (1 >= 5) or (3 >= 3) // true
-    },
+    "not": not 1 == 2, // true
+    "!": ! (1 ~= "1"), // false
+    "and": (5 > 2) and (4 < 9), // true
+    "or": (1 >= 5) or (3 >= 3), // true
     Precendence: {
         not: not true or true, // false
         // not true or true = not (true or true) = not (true) = false
-
         "!": ! true or true, // true
         // ! true or true = (! true) or true = (false) or true = true
-        
         "!()": ! (true or true) // false
         // ! (true or true) = ! (true) = false
     }
