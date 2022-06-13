@@ -18,9 +18,8 @@ var arrayObject = [
         email: "arul@fakeemail.com"
     }
 ]
-var groupedByEmail = arrayObject groupBy ((item, index) -> item.email)
-
+var groupedByEmail = arrayObject groupBy $.email
 var dynamicInputEmail = "arul@fakeemail.com"
 ---
-groupedByEmail[dynamicInputEmail][0]
-//(arrayObject filter $.email == dynamicInputEmail)[0]
+groupedByEmail[dynamicInputEmail]
+//arrayObject filter $.email == dynamicInputEmail
