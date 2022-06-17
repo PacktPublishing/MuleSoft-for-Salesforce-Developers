@@ -6,52 +6,6 @@ You can either copy and paste from this README directly, or you can go to the co
 
 ## Multi-type functions
 
-`plusplus.dwl`
-
-```dataweave
-%dw 2.0
-output application/dw
----
-{
-    Array: [1, 2] ++ [3, 4], // [1, 2, 3, 4]
-    String: "Hello" ++ " " ++ "World" ++ "!", // "Hello World!"
-    Object: { a: "b" } ++ { c: "d" }, // {"a":"b", "c":"d"}
-    DateTime: |2020-01-01| ++ |10:00:00| // |2020-01-01T10:00:00|
-}
-```
-
-`sizeOf.dwl`
-
-```dataweave
-%dw 2.0
-output application/dw
----
-{
-    Array: sizeOf([0, 1, 2, 3]), // 4
-    String: sizeOf("Hello World!"), // 12
-    Object: sizeOf({"a":"b", "c":"d"}), // 2
-    Null: sizeOf(null) // null
-}
-```
-
-`typeOf.dwl`
-
-```dataweave
-%dw 2.0
-output application/dw
----
-{
-    Array: typeOf([0, 1, 2, 3]), // Array
-    String: typeOf("Hello World!"), // String
-    Object: typeOf({"a":"b", "c":"d"}), // Object
-    Null: typeOf(null), // Null
-    Boolean: typeOf(true), // Boolean
-    Number: typeOf(10), // Number
-    Date: typeOf(|2020-01-01|), // Date
-    Period: typeOf(|P1Y|) // Period
-}
-```
-
 `isEmpty.dwl`
 
 ```dataweave
@@ -64,6 +18,26 @@ output application/dw
     Object: isEmpty({}), // true
     Null: isEmpty(null) // true
 }
+```
+
+`log.dwl`
+
+```dataweave
+%dw 2.0
+output application/json
+---
+[1, 2, 3] map log($)
+```
+
+`then.dwl`
+
+```dataweave
+%dw 2.0
+output application/json
+---
+// [1, 2] + [3] // original
+// flatten([1, 2] + [3]) // regular flatten
+[1, 2] + [3] then flatten($) // using then
 ```
 
 `groupBy.dwl`
@@ -96,3 +70,62 @@ groupedByEmail[dynamicInputEmail]
 //arrayObject filter $.email == dynamicInputEmail
 ```
 
+`map.dwl`
+
+```dataweave
+%dw 2.0
+output application/json
+---
+["a","b","c"] map {
+    ($$): $
+}
+```
+
+`reduce-simple.dwl`
+
+```dataweave
+%dw 2.0
+output application/json
+---
+(1 to 10) as Array reduce ($$ + $) // output is 55
+```
+
+`reduce-complex.dwl`
+
+```dataweave
+%dw 2.0
+output application/json
+import update from dw::util::Values
+var arr = [
+    {
+        code: "ABC",
+        isNewGroup: false
+    },
+    {
+        code: "DEF",
+        isNewGroup: true
+    },
+    {
+        code: "GHI",
+        isNewGroup: true
+    },
+    {
+        code: "JKL",
+        isNewGroup: false
+    },
+    {
+        code: "MNO",
+        isNewGroup: true
+    }
+]
+---
+arr reduce (item, acc=[]) -> do {
+    var previousItem = acc[-1]
+    var previousItemIndex = acc find previousItem
+    ---
+    if (item.isNewGroup or previousItem ~= null) 
+        acc + item.code
+    else 
+        acc update previousItemIndex with "$previousItem,$(item.code)"
+}
+```
