@@ -40,6 +40,8 @@ output application/json
 [1, 2] + [3] then flatten($) // using then
 ```
 
+## Arrays
+
 `groupBy.dwl`
 
 ```dataweave
