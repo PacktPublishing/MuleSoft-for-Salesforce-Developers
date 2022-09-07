@@ -1,3 +1,3 @@
-# MuleSoft for Salesforce Developers & Architects
+# MuleSoft for Salesforce Developers
 
-MuleSoft for Salesforce Developers & Architects published by Packt
+MuleSoft for Salesforce Developers published by Packt
