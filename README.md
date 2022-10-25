@@ -69,3 +69,7 @@ s a developer advocate at MuleSoft. Shes been evangelizing MuleSoft through her 
 works as a senior integration architect at Cognizant. He previously worked at Akmin Technologies, Quinnox, IBM, and TCS. He has over 18 years of experience in the integration and API domain and has designed over 1,000 integrations. His educational qualifications include Master of Computer Applications and Master of Business Administration degrees, and his professional qualifications include MuleSoft Mentor, MuleSoft Certified Integration Architect, MuleSoft Certified Platform Architect, MuleSoft Certified Developer Level 1, and SoftwareAG webMethods Certified Professional. He is from Tamil Nadu, India, and currently lives in Singapore. He shares his knowledge through Udemy and the Tech Lightning YouTube channel.
 
 
+### Download a free PDF
+
+ <i>If you have already purchased a print or Kindle version of this book, you can get a DRM-free PDF version at no cost.<br>Simply click on the link to claim your free PDF.</i>
+<p align="center"> <a href="https://packt.link/free-ebook/9781801079600">https://packt.link/free-ebook/9781801079600 </a> </p>
