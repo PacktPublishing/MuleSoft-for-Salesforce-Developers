@@ -1,0 +1,98 @@
+#%RAML 1.0
+title: musicbox-prc-api
+
+
+/songs:
+  get:
+    displayName: Retrieve all the songs
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include /Examples/songs-example.raml
+  /{dateAdded}:
+    delete:
+      displayName : Delete the song added on a particular date
+      responses:
+        200:
+          body:
+            application/json:
+              example: {
+                "The song has been deleted"
+              }  
+  /{artistName}:
+    get:
+      queryParameters:
+          offset:
+            example: 1
+            type: number
+            format: int
+          limit:
+            example: 20
+            type: number
+            format: int
+      displayName: Retrive a paginated list of songs
+      description: Retrieve a paginated list of songs based on the artists's name
+      responses:
+        200:
+          body:
+            application/json:
+              example: !include /Examples/songs-example.raml        
+  
+
+/posdcasts:
+  get:
+      displayName: Retrive all the podcasts 
+      responses:
+        200:
+          body:
+            application/json:
+              example: !include /Examples/podcast-example.raml
+/artists:
+  get:
+      displayName: Retrive all the artists 
+      responses:
+        200:
+          body:
+            application/json:
+              example: !include /Examples/artist-example.raml
+  /{artistName}:
+    patch:
+      displayName: Change the artist's name
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                {
+                  Artist's name has been changed
+                }
+
+/genres:
+  get:
+      displayName: Retrive all the genres 
+      responses:
+        200:
+          body:
+            application/json:
+              example: !include /Examples/genre-example.raml
+/collections:
+  /{artistName}:
+    get:
+      displayName: Retrive the list of all collection
+      responses:
+        200:
+          body:
+            application/json:
+              example: !include /Examples/collection-example.raml
+  post:
+    displayName: Add a new collection
+    body:
+      application/json:
+        example: !include /Examples/collection-example.raml 
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include /Examples/collection-example.raml
+      
